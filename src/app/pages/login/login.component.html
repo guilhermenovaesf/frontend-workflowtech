@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div>
+    <div class="login-title">
+      WorkflowTech
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form class="t-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Insira seu email" [(ngModel)]="email" name="email">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" placeholder="Insira sua senha" [(ngModel)]="password" name="password">
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-raised-button color="primary" (click)="onLogin()">Entrar</button>
+            <button mat-button color="accent" (click)="onCreateAccount()">Criar Usuário</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

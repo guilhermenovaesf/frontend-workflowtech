@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Garante que o contêiner ocupe toda a altura da janela */
+  background-color: #f5f5f5; /* Cor de fundo clarinha */
+  margin: 0; /* Remove margem para evitar rolagem */
+  overflow: hidden; /* Impede rolagem */
+}
+
+.login-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 0; /* Ajusta margens */
+  margin-bottom: 20px;
+  color: #333; /* Cor do texto */
+}
+
+.login-container {
+  width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 400px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+  background-color: #ffffff; /* Certifica-se de que o fundo do card seja branco */
+  border-radius: 8px; /* Canto arredondado para o card */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
