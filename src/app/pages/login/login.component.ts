@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,10 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  constructor(private router: Router){
+
+  }
+
   onLogin() {
     // Adicione a lógica de login aqui
     console.log('Email:', this.email);
@@ -16,7 +21,6 @@ export class LoginComponent {
   }
 
   onCreateAccount() {
-    // Adicione a lógica para criar um novo usuário aqui
-    console.log('Redirecting to create account page...');
+    this.router.navigate(['/form']);
   }
 }

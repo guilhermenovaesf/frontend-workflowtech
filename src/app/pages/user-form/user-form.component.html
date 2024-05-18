@@ -1,1 +1,35 @@
-<p>user-form works!</p>
+<div class="create-account-container">
+  <div>
+    <div class="login-title create-account-title">
+      WorkflowTech
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form class="t-center" [formGroup]="accountForm" (ngSubmit)="onCreateAccount()">
+          <mat-form-field  class="">
+            <mat-label>Nome</mat-label>
+            <input class="text" autofocus  matInput type="text" formControlName="name" placeholder="Insira seu nome">
+            <mat-error *ngIf="accountForm.get('name')?.hasError('required')">Nome é obrigatório</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Insira seu email">
+            <mat-error *ngIf="accountForm.get('email')?.hasError('required')">Email é obrigatório</mat-error>
+            <mat-error *ngIf="accountForm.get('email')?.hasError('email')">Email inválido</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Insira sua senha">
+            <mat-error *ngIf="accountForm.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
+            <mat-error *ngIf="accountForm.get('password')?.hasError('minlength')">Senha deve ter pelo menos 6 caracteres</mat-error>
+          </mat-form-field>
+          <mat-checkbox formControlName="isAdmin">Administrador</mat-checkbox>
+          <div class="button-container">
+            <button mat-button color="primary" type="button" (click)="return()">Voltar</button>
+            <button mat-raised-button color="primary" type="submit">Criar Conta</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
