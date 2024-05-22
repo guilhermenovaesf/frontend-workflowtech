@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,12 +11,12 @@ import { Router } from '@angular/router';
 export class UserFormComponent implements OnInit{
   accountForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, public userService: UserService) {
     this.accountForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      isAdmin: [false]
+      admin: [false]
     });
   }
   ngOnInit(): void {
@@ -28,9 +29,13 @@ export class UserFormComponent implements OnInit{
 
   onCreateAccount() {
     if (this.accountForm.valid) {
-      // Processar os dados do formulário
-      console.log('Dados do formulário:', this.accountForm.value);
-      // Navegar para outra rota após a criação da conta, se necessário
+      const formValue = this.accountForm.value;
+
+      // Convert 'admin' boolean to 0 or 1
+      formValue.admin = formValue.admin ? 1 : 0;
+      this.userService.postUser(this.accountForm.value).subscribe((data)=>{
+        console.log(data)
+      })
       this.router.navigate(['/login']);
     } else {
       // Formulário inválido, exibir mensagens de erro ou fazer outras ações necessárias

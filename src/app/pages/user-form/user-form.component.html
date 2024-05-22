@@ -23,7 +23,7 @@
             <mat-error *ngIf="accountForm.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
             <mat-error *ngIf="accountForm.get('password')?.hasError('minlength')">Senha deve ter pelo menos 6 caracteres</mat-error>
           </mat-form-field>
-          <mat-checkbox formControlName="isAdmin">Administrador</mat-checkbox>
+          <mat-checkbox formControlName="admin">Administrador</mat-checkbox>
           <div class="button-container">
             <button mat-button color="primary" type="button" (click)="return()">Voltar</button>
             <button mat-raised-button color="primary" type="submit">Criar Conta</button>
