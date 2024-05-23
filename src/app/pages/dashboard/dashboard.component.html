@@ -1,1 +1,36 @@
-<p>dashboard works!</p>
+<mat-toolbar color="primary">
+  <span>Dashboard</span>
+</mat-toolbar>
+
+<div class="dashboard-container">
+  <div class="spacer"></div>
+  <mat-card class="large-card">Card 1</mat-card>
+  <div class="spacer"></div>
+  <mat-card class="small-card">
+    <mat-card-header class="h-color">
+      <div mat-card-title class="card-title-wrapper">
+        <span class="card-title">Fluxos Disponíveis</span>
+      </div>
+      <button *ngIf="userService.user.admin" mat-button class="create-button" (click)="goToCreateWorkflowType()">Criar</button>
+
+    </mat-card-header>
+    <div class="content-wrapper">
+      <div class="workflow-list" *ngIf="workflowTypeList.length > 0; else noData">
+        <div class="workflow-item" *ngFor="let workflowType of workflowTypeList; let i = index">
+          <mat-divider *ngIf="i===0"></mat-divider>
+          <button mat-button class="workflow-item" (click)="goToWorkflowForm(workflowType)">
+            <div class="workflow-title">{{ workflowType.title }}</div>
+          </button>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <ng-template #noData>
+        <div class="no-data">No data available</div>
+      </ng-template>
+    </div>
+    <ng-template #noData>
+      <div class="no-data">No data available</div>
+    </ng-template>
+  </mat-card>
+  <div class="spacer"></div>
+</div>
