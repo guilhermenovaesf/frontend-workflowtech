@@ -11,7 +11,7 @@
       <div mat-card-title class="card-title-wrapper">
         <span class="card-title">Fluxos Disponíveis</span>
       </div>
-      <button *ngIf="userService.user.admin" mat-button class="create-button" (click)="goToCreateWorkflowType()">Criar</button>
+      <button *ngIf="userService.user?.admin" mat-button class="create-button" (click)="goToCreateWorkflowType()">Criar</button>
 
     </mat-card-header>
     <div class="content-wrapper">
