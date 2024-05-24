@@ -5,11 +5,21 @@ import { AppRoutesModule } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { WorkflowTypeFormModule } from './pages/workflow-type-form/workflow-type-form.module';
+import 'froala-editor/js/plugins.pkgd.min.js';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutesModule,HttpClientModule ,BrowserAnimationsModule,DashboardModule ],
+  imports: [BrowserModule,
+            AppRoutesModule,
+            HttpClientModule ,
+            BrowserAnimationsModule,
+            DashboardModule,
+            WorkflowTypeFormModule,
+            FroalaViewModule.forRoot(),
+            FroalaEditorModule.forRoot()],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
