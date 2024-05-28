@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-workflow-type-form',
@@ -35,4 +37,43 @@ export class WorkflowTypeFormComponent {
     language: 'en',
     zIndex: 789
   };
+
+  form: FormGroup;
+  userList:any;
+  constructor(private fb: FormBuilder, public userService :UserService) {
+    this.form = this.fb.group({
+      title: [''],
+      description: [''],
+      workflowTypeStepTOList: this.fb.array([])
+    });
+  }
+
+  ngOnInit(): void {
+      this.userService.listUsers().subscribe((data)=>{
+        this.userList = data;
+        console.log(this.userList)
+      })
+  }
+
+  get steps(): FormArray {
+    return this.form.get('workflowTypeStepTOList') as FormArray;
+  }
+
+  addStep(): void {
+    const stepForm = this.fb.group({
+      description: [''],
+      user: ['']
+    });
+    this.steps.push(stepForm);
+  }
+
+  removeStep(index: number): void {
+    this.steps.removeAt(index);
+  }
+  onSubmit(): void {
+    if (this.form.valid) {
+      console.log(this.form.value);
+      // Processar os dados do formulário conforme necessário
+    }
+  }
 }

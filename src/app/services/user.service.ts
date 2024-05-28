@@ -38,6 +38,14 @@ export class UserService {
     );
   }
 
+  listUsers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/list`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
   getUserId(): number | null {
     const userId = localStorage.getItem('userId');
     return userId ? parseInt(userId, 10) : null;

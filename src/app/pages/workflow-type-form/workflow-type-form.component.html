@@ -1,14 +1,39 @@
 <mat-toolbar color="primary">
-  <span>Formulário de fluxo </span>
+  <span>Formulário de fluxo</span>
 </mat-toolbar>
 <div class="dashboard-container">
   <div class="spacer"></div>
   <mat-card class="large-card">
-    <div
-      #editor="froalaEditor"
-      [froalaEditor]="froalaTiny"
-      formControlName="description"
-    ></div
-  ></mat-card>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input matInput formControlName="title" id="title" class="w-100 m-t-5" />
+      </div>
+
+      <div class="form-group form-group-froala form-group form-group-default m-t-15">
+        <label for="description">Descrição</label>
+        <div #editor="froalaEditor" [froalaEditor]="froalaTiny" formControlName="description" class="froala-editor m-t-5"></div>
+      </div>
+
+      <div formArrayName="workflowTypeStepTOList">
+        <div *ngFor="let step of steps.controls; let i = index" [formGroupName]="i" class="form-group m-t-15">
+          <label for="step-description-{{i}}">Etapa</label>
+          <input matInput formControlName="description" id="step-description-{{i}}" class="w-100 m-t-5 m-t-10" />
+
+          <label class=" m-t-15" for="user-{{i}}">Responsável</label>
+          <select matNativeControl formControlName="user">
+            <option *ngFor="let user of userList" value="user">{{user.name}}</option>
+          </select>
+
+          <button mat-button color="warn" (click)="removeStep(i)">Remover Etapa</button>
+        </div>
+      </div>
+
+      <button mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
+
+      <div class="spacer"></div>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+    </form>
+  </mat-card>
   <div class="spacer"></div>
 </div>

@@ -7,6 +7,10 @@ import { WorkflowTypeFormRoutingModule } from './workflow-type-form-routing.modu
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { WorkflowTypeFormComponent } from './workflow-type-form.component';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -15,11 +19,16 @@ import { FroalaEditorModule } from 'angular-froala-wysiwyg';
   imports: [
     CommonModule,
     MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatDividerModule,
     MatButtonModule,
     WorkflowTypeFormRoutingModule,
-    FroalaEditorModule
+    FroalaEditorModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ]
 })
 export class WorkflowTypeFormModule { }
