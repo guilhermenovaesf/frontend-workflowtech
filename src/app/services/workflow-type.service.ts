@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -9,10 +9,26 @@ export class WorkflowTypeService {
 
   private apiUrl = 'http://localhost:8080/workflowType';
 
+  private userId = localStorage.getItem('userId');
+
   constructor(private http: HttpClient) { }
 
   getWorkflowTypes(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl+"/list");
+  }
+
+  createWorkflowType(workflowType: any){
+    let httpOptions;
+    if(this.userId){
+       httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'UserId': this.userId.toString()  // Adiciona o userId ao cabeçalho da requisição
+        })
+      };
+    }
+
+    return this.http.post<any>(`${this.apiUrl}/create`, workflowType,httpOptions);
   }
 
 }

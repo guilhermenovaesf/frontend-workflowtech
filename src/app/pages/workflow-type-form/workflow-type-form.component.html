@@ -7,7 +7,7 @@
     <form [formGroup]="form">
       <div class="form-group">
         <label for="title">Título</label>
-        <input matInput formControlName="title" id="title" class="w-100 m-t-5" />
+        <input matInput formControlName="title" id="title" class="w-95 m-t-5" />
       </div>
 
       <div class="form-group form-group-froala form-group form-group-default m-t-15">
@@ -17,22 +17,25 @@
 
       <div formArrayName="workflowTypeStepTOList">
         <div *ngFor="let step of steps.controls; let i = index" [formGroupName]="i" class="form-group m-t-15">
-          <label for="step-description-{{i}}">Etapa</label>
-          <input matInput formControlName="description" id="step-description-{{i}}" class="w-100 m-t-5 m-t-10" />
+          <label for="step-description-{{i}}">Descrição da Etapa {{i+1}}</label>
+          <input matInput formControlName="description" id="step-description-{{i}}" class="w-95 m-t-5 m-t-10 m-b-15" />
 
-          <label class=" m-t-15" for="user-{{i}}">Responsável</label>
-          <select matNativeControl formControlName="user">
-            <option *ngFor="let user of userList" value="user">{{user.name}}</option>
+          <label class="m-t-15" for="user-select">Responsável</label>
+          <select matNativeControl formControlName="user" id="user-select" class="custom-select m-t-5">
+            <option value="" disabled selected>Selecione um responsável</option>
+            <option *ngFor="let user of userList" [value]="user.id">{{user.name}}</option>
           </select>
-
-          <button mat-button color="warn" (click)="removeStep(i)">Remover Etapa</button>
+          <mat-icon class="pointer m-t-5" aria-hidden="false" color="warn" (click)="removeStep(i)" fontIcon="delete"></mat-icon>
+          <!-- <button mat-button >Remover Etapa</button> -->
         </div>
       </div>
 
-      <button mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
+      <button class="m-t-10" mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
 
       <div class="spacer"></div>
-      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+      <div class="t-end m-t-15" >
+        <button style="width: 150px;" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Criar</button>
+      </div>
     </form>
   </mat-card>
   <div class="spacer"></div>

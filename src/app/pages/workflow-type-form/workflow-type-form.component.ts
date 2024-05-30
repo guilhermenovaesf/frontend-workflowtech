@@ -1,6 +1,8 @@
+import { WorkflowTypeService } from './../../services/workflow-type.service';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workflow-type-form',
@@ -40,7 +42,7 @@ export class WorkflowTypeFormComponent {
 
   form: FormGroup;
   userList:any;
-  constructor(private fb: FormBuilder, public userService :UserService) {
+  constructor(private fb: FormBuilder, public userService :UserService, public workflowTypeService : WorkflowTypeService, public router: Router) {
     this.form = this.fb.group({
       title: [''],
       description: [''],
@@ -70,10 +72,47 @@ export class WorkflowTypeFormComponent {
   removeStep(index: number): void {
     this.steps.removeAt(index);
   }
+
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
-      // Processar os dados do formulário conforme necessário
+      const clonedFormValue = this.cloneDeep(this.form.value);
+
+      clonedFormValue.workflowTypeStepTOList.forEach((step: any, index: number) => {
+        const user = this.selectedUser(index);
+        if (user) {
+          step.user = user;  // Atualiza o campo 'user' com o objeto de usuário completo
+        } else {
+          console.warn(`User not found for step ${index + 1}`);
+        }
+      });
+      this.workflowTypeService.createWorkflowType(clonedFormValue).subscribe((data)=>{
+        this.router.navigate(['/dashboard']);
+      })
+      console.log('Original form value:', this.form.value);
+      console.log('Cloned and modified form value:', clonedFormValue);
+
+      // Processar os dados do formulário clonados e modificados conforme necessário
     }
+  }
+
+  selectedUser(stepIndex: number) {
+    const stepControl = this.steps.at(stepIndex);
+    if (stepControl) {
+      const userControl = stepControl.get('user');
+      if (userControl) {
+        const selectedUserId = userControl.value;
+        console.log('Selected user ID:', selectedUserId);
+        const user = this.userList.find((user: { id: any; }) => user.id == selectedUserId);
+        if (!user) {
+          console.warn(`No user found with ID ${selectedUserId}`);
+        }
+        return user;
+      }
+    }
+    return null;
+  }
+
+  cloneDeep(obj: any) {
+    return JSON.parse(JSON.stringify(obj));
   }
 }
