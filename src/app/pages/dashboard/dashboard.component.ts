@@ -21,6 +21,7 @@ export class DashboardComponent {
   }
 
   goToWorkflowForm(workflowType: any){
+    this.router.navigate(['/workflow/form/'+workflowType.id]);
     console.log(workflowType)
   }
 

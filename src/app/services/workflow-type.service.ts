@@ -1,34 +1,44 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkflowTypeService {
-
   private apiUrl = 'http://localhost:8080/workflowType';
 
   private userId = localStorage.getItem('userId');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getWorkflowTypes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+"/list");
+    return this.http.get<any[]>(this.apiUrl + '/list');
   }
 
-  createWorkflowType(workflowType: any){
+  createWorkflowType(workflowType: any) {
     let httpOptions;
-    if(this.userId){
-       httpOptions = {
+    if (this.userId) {
+      httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'UserId': this.userId.toString()  // Adiciona o userId ao cabeçalho da requisição
-        })
+          UserId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
+        }),
       };
     }
 
-    return this.http.post<any>(`${this.apiUrl}/create`, workflowType,httpOptions);
+    return this.http.post<any>(
+      `${this.apiUrl}/create`,
+      workflowType,
+      httpOptions
+    );
   }
 
+  getWorkflowType(workflowTypeId: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${workflowTypeId}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

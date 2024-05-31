@@ -7,7 +7,8 @@ export const routes: Routes = [
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   { path: 'form', loadChildren: () => import('./pages/user-form/user-form.module').then(m => m.UserFormModule) },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'workflowtype/form', loadChildren: () => import('./pages/workflow-type-form/workflow-type-form.module').then(m => m.WorkflowTypeFormModule), canActivate: [AuthGuard] },  // Proteja a rota do dashboard
+  { path: 'workflowtype/form', loadChildren: () => import('./pages/workflow-type-form/workflow-type-form.module').then(m => m.WorkflowTypeFormModule), canActivate: [AuthGuard] },
+  { path: 'workflow/form/:workflowTypeId', loadChildren: () => import('./pages/workflow-form/workflow-form.module').then(m => m.WorkflowFormModule), canActivate: [AuthGuard] },  // Proteja a rota do dashboard
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

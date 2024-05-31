@@ -21,7 +21,7 @@
           <input matInput formControlName="description" id="step-description-{{i}}" class="w-95 m-t-5 m-t-10 m-b-15" />
 
           <label class="m-t-15" for="user-select">Responsável</label>
-          <select matNativeControl formControlName="user" id="user-select" class="custom-select m-t-5">
+          <select matNativeControl formControlName="userId" id="user-select" class="custom-select m-t-5">
             <option value="" disabled selected>Selecione um responsável</option>
             <option *ngFor="let user of userList" [value]="user.id">{{user.name}}</option>
           </select>

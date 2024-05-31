@@ -26,16 +26,6 @@ export class WorkflowTypeFormComponent {
     htmlAllowedAttrs: ['.*'],
     htmlRemoveTags: [],
     toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'align', 'formatOL', 'formatUL',  'insertLink', 'insertTable','html'],
-    imageUploadParam: 'file',
-    imageUploadParams: { id: 'my_editor' },
-    imageUploadMethod: 'POST',
-    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-    fileUploadParams: { id: 'my_editor' },
-    fileAllowedTypes:  ['pdf', 'ppt', 'xls', 'xlsx', 'docx', 'doc'],
-    fileMaxSize: 1024 * 1024 * 10,
-    videoAllowedTypes: [''],
-    videoMaxSize: 1024,
-    videoUpload: false,
     language: 'en',
     zIndex: 789
   };
@@ -64,7 +54,7 @@ export class WorkflowTypeFormComponent {
   addStep(): void {
     const stepForm = this.fb.group({
       description: [''],
-      user: ['']
+      userId: ['']
     });
     this.steps.push(stepForm);
   }
@@ -75,44 +65,12 @@ export class WorkflowTypeFormComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      const clonedFormValue = this.cloneDeep(this.form.value);
-
-      clonedFormValue.workflowTypeStepTOList.forEach((step: any, index: number) => {
-        const user = this.selectedUser(index);
-        if (user) {
-          step.user = user;  // Atualiza o campo 'user' com o objeto de usuário completo
-        } else {
-          console.warn(`User not found for step ${index + 1}`);
-        }
-      });
-      this.workflowTypeService.createWorkflowType(clonedFormValue).subscribe((data)=>{
+      console.log(this.form.value,"this.form.value)")
+      this.workflowTypeService.createWorkflowType(this.form.value).subscribe((data)=>{
         this.router.navigate(['/dashboard']);
       })
-      console.log('Original form value:', this.form.value);
-      console.log('Cloned and modified form value:', clonedFormValue);
-
       // Processar os dados do formulário clonados e modificados conforme necessário
     }
   }
 
-  selectedUser(stepIndex: number) {
-    const stepControl = this.steps.at(stepIndex);
-    if (stepControl) {
-      const userControl = stepControl.get('user');
-      if (userControl) {
-        const selectedUserId = userControl.value;
-        console.log('Selected user ID:', selectedUserId);
-        const user = this.userList.find((user: { id: any; }) => user.id == selectedUserId);
-        if (!user) {
-          console.warn(`No user found with ID ${selectedUserId}`);
-        }
-        return user;
-      }
-    }
-    return null;
-  }
-
-  cloneDeep(obj: any) {
-    return JSON.parse(JSON.stringify(obj));
-  }
 }
