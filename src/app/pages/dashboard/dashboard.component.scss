@@ -63,6 +63,16 @@ mat-toolbar {
   padding: 8px 0;
 }
 
+.workflow-list-title{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.workflow-time-subtitle {
+  font-size: 12px;
+  color: grey;
+}
+
 mat-divider {
   margin: 8px 0;
 }
@@ -83,6 +93,7 @@ mat-divider {
   font-size: 0.875rem; /* Tamanho de fonte menor para um botão sutil */
   margin-right: 0; /* Remover margem direita se necessário */
   margin-left: 64px;
+  top: -4px;
 }
 
 .h-color{
@@ -106,3 +117,49 @@ mat-divider {
  background-clip: content-box;
   background-color: #673ab7;
 }
+
+.divider {
+  height: 1px;
+  background-color: #0000001c;
+  margin: 0;
+}
+
+.p-t-10{
+  padding-top: 10px;
+}
+
+.status{
+  position: absolute;
+  right: 15px;
+  transform: translateY(-50%);
+  background-color: yellow;
+  padding: 2px 5px 2px 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+.status.progress {
+  background-color: blue; /* Cor de fundo azul para progresso */
+}
+
+.status.finished {
+  background-color: green; /* Cor de fundo verde para finalizado */
+}
+
+.status.canceled {
+  background-color: red; /* Cor de fundo vermelho para cancelado */
+}
+
+.userName{
+  position: absolute;
+  right: 15px;
+  transform: translateY(-50%);
+  color: grey;
+  font-size: 13px;
+}
+
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: 4px;
+  margin-left: 90px;
+}
+

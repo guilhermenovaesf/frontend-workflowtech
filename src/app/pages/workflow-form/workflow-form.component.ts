@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkflowTypeService } from '../../services/workflow-type.service';
@@ -66,7 +67,8 @@ export class WorkflowFormComponent {
     public workflowTypeService: WorkflowTypeService,
     public workflowService: WorkflowService,
     private fb: FormBuilder,
-    public router: Router
+    public router: Router,
+    public userService: UserService
   ) {
     this.form = this.fb.group({
       description: [''],
@@ -97,5 +99,9 @@ export class WorkflowFormComponent {
 
   returnDash(){
     this.router.navigate(['/dashboard']);
+  }
+
+  loggout(){
+    this.userService.logout();
   }
 }

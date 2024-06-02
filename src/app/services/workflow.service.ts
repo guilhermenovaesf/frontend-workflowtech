@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,13 @@ export class WorkflowService {
       workflow,
       httpOptions
     );
+  }
+
+  listMyWorkflows(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + '/listMyWorkflows/'+this.userId);
+  }
+
+  listMyWorkflowsAssignedToMe(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + '/listWorkflowsAssignedMe/'+this.userId);
   }
 }

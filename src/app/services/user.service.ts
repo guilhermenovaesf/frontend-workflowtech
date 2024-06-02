@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class UserService {
 
   private apiUrl = 'http://localhost:8080/users';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.initializeUser();
   }
 
@@ -54,6 +55,7 @@ export class UserService {
   // Função para remover o ID do usuário do localStorage (logout)
   logout(): void {
     localStorage.removeItem('userId');
+    this.router.navigate(['/login']);
   }
 
   private initializeUser(): void {

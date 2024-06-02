@@ -77,4 +77,8 @@ export class WorkflowTypeFormComponent {
     this.router.navigate(['/dashboard']);
   }
 
+  loggout(){
+    this.userService.logout();
+  }
+
 }

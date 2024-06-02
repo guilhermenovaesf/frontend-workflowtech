@@ -42,3 +42,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .p-absolute{
   position: absolute;
 }
+
+.h-100{
+  height: 100%;
+}
+
+.hover-effect {
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.hover-effect:hover {
+  background-color: #f0f0f0; /* Cor cinza clara ao passar o mouse */
+}
+
+.m-l-15{
+  margin-left: 15px;
+}
+
+
+.end{
+  position: absolute;
+  right: 15px;
+}

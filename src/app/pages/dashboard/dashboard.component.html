@@ -1,10 +1,57 @@
 <mat-toolbar color="primary">
   <span>Dashboard</span>
+  <mat-icon class="pointer end" aria-hidden="false" color="white" (click)="loggout()" fontIcon="logout"></mat-icon>
 </mat-toolbar>
 
 <div class="dashboard-container">
   <div class="spacer"></div>
-  <mat-card class="large-card">Card 1</mat-card>
+  <mat-card class="large-card">
+    <mat-tab-group  (selectedTabChange)="onTabChange($event)">
+      <mat-tab label="Meus fluxos">
+        <ng-template mat-tab-label>
+          <span matBadge="{{myWorkflows?.length}}"  matBadgeSize="medium" matBadgeOverlap="false">Meus fluxos</span>
+        </ng-template>
+        <div class="table">
+          <div class="row hover-effect d-flex" *ngFor="let workflow of myWorkflows; let i = index" (click)="openMyWorklowsModal(workflow)">
+            <div *ngIf="i === 0" class="divider"></div>
+
+            <div mat-button class="b-list m-l-15  p-t-10 " >
+                <div class="workflow-list-title ">{{ workflow.title }}</div>
+                <div *ngIf="!workflow.canceled && !workflow.finished" class="status progress">
+                  Em progresso
+                </div>
+                <div *ngIf="workflow.finished" class="status finished">
+                  Finalizado
+                </div>
+                <div *ngIf="workflow.canceled" class="status canceled">
+                  Recusado
+                </div>
+                <div class="workflow-time-subtitle   m-t-5">{{ workflow.createdOn | date:  'dd/MM/yyyy HH:mm' }}</div>
+            </div>
+            <div  class="divider"></div>
+          </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Pendentes minha aprovação">
+      <ng-template mat-tab-label>
+        <span matBadge="{{workflowsAssignedToMe?.length}}"  matBadgeSize="medium" matBadgeOverlap="false">Pendentes minha aprovação</span>
+      </ng-template>
+      <div class="table">
+        <div class="row hover-effect d-flex" *ngFor="let assignedMe of workflowsAssignedToMe; let i = index" (click)="opeStepToAnalise(assignedMe)">
+          <div *ngIf="i === 0" class="divider"></div>
+          <div mat-button class="b-list m-l-15  p-t-10 " >
+            <div class="workflow-list-title ">{{ assignedMe.title }}</div>
+            <div class="userName">
+              {{assignedMe.userName}}
+            </div>
+            <div class="workflow-time-subtitle   m-t-5">{{ assignedMe.createdOn | date:  'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+        <div  class="divider"></div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
   <div class="spacer"></div>
   <mat-card class="small-card">
     <mat-card-header class="h-color" style="z-index: 999;">

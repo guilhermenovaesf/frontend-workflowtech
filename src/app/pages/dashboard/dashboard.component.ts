@@ -2,6 +2,7 @@ import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 import { WorkflowTypeService } from '../../services/workflow-type.service';
 import { Router } from '@angular/router';
+import { WorkflowService } from '../../services/workflow.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +11,20 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   workflowTypeList: any[] = [];
+  myWorkflows: any;
+  workflowsAssignedToMe:any;
 
-  constructor(private workflowTypeService: WorkflowTypeService , public userService: UserService,public router :Router) {}
+  constructor(private workflowTypeService: WorkflowTypeService,
+              public userService: UserService,
+              public router :Router,
+              public workflowService: WorkflowService) {}
 
   ngOnInit(): void {
     this.workflowTypeService.getWorkflowTypes().subscribe((data) => {
       this.workflowTypeList = data;
-      console.log(this.workflowTypeList)
     });
+    this.getMyWorkflows();
+    this.getWorkflowsAssignedToMe();
   }
 
   goToWorkflowForm(workflowType: any){
@@ -27,5 +34,40 @@ export class DashboardComponent {
 
   goToCreateWorkflowType(){
     this.router.navigate(['/workflowtype/form']);
+  }
+
+  getMyWorkflows(){
+    this.workflowService.listMyWorkflows().subscribe((data)=>{
+      this.myWorkflows = data;
+      console.log(data);
+    })
+  }
+
+  getWorkflowsAssignedToMe(){
+    this.workflowService.listMyWorkflowsAssignedToMe().subscribe((data)=>{
+      this.workflowsAssignedToMe = data;
+      console.log(this.workflowsAssignedToMe,"this.workflowsAssignedToM");
+    })
+  }
+
+  openMyWorklowsModal(item: any){
+
+  }
+
+  opeStepToAnalise(assignedMe: any){
+
+  }
+
+  onTabChange(e:any){
+    if(e.index == 0){
+      this.getMyWorkflows();
+    }
+    else if(e.index == 1){
+      this.getWorkflowsAssignedToMe();
+    }
+  }
+
+  loggout(){
+    this.userService.logout();
   }
 }
