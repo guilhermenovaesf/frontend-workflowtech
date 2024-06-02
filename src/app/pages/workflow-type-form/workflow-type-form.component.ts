@@ -73,4 +73,8 @@ export class WorkflowTypeFormComponent {
     }
   }
 
+  returnDash(){
+    this.router.navigate(['/dashboard']);
+  }
+
 }

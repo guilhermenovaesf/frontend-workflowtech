@@ -19,6 +19,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 10px;
 }
 
+.m-t-30{
+  margin-top: 30px;
+}
+
 .m-b-15{
   margin-bottom: 15px;
 }
@@ -29,4 +33,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .pointer{
   cursor: pointer;
+}
+
+.m-l-5{
+  margin-left: 5px;
+}
+
+.p-absolute{
+  position: absolute;
 }

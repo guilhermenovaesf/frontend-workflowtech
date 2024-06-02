@@ -22,7 +22,7 @@ export class WorkflowTypeService {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          UserId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
+          userId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
         }),
       };
     }

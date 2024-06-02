@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Formulário de fluxo</span>
+  <span>Formulário de criação fluxo</span>
 </mat-toolbar>
 <div class="dashboard-container">
   <div class="spacer"></div>
@@ -33,10 +33,15 @@
       <button class="m-t-10" mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
 
       <div class="spacer"></div>
-      <div class="t-end m-t-15" >
+    </form>
+    <div class="m-t-50 d-flex">
+      <div class="p-absolute">
+        <button mat-button color="accent" type="button" (click)="returnDash()">Voltar</button>
+      </div>
+      <div class="t-end">
         <button style="width: 150px;" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Criar</button>
       </div>
-    </form>
+    </div>
   </mat-card>
   <div class="spacer"></div>
 </div>

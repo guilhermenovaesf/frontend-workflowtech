@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.dashboard-container {
+  flex-direction: row; /* Mudar para linha */
+  padding: 30px 150px 30px 150px;
+  flex-grow: 1;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.f-17 {
+  font-size: 17px;
+}
+
+.large-card {
+  flex: 10;
+  margin: 0 8px;
+  width: 100%;
+}
+
+mat-card {
+  width: 400px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+  background-color: #ffffff; /* Certifica-se de que o fundo do card seja branco */
+  border-radius: 8px; /* Canto arredondado para o card */
+}
+
+.card-margins {
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+.f-18{
+  font-size: 18px;
+}

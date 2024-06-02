@@ -17,7 +17,7 @@ mat-card {
 .dashboard-container {
   display: flex;
   flex-direction: row; /* Mudar para linha */
-  padding: 24px;
+  padding: 30px;
   flex-grow: 1;
 }
 
@@ -113,4 +113,8 @@ input:focus {
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.m-t-50{
+  margin-top: 50px;
 }

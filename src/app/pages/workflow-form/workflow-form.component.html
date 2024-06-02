@@ -1,1 +1,32 @@
-<p>workflow-form works!</p>
+<mat-toolbar color="primary">
+  <span>{{ workflowType?.title }}</span>
+</mat-toolbar>
+
+<div class="dashboard-container">
+  <div class="description ">
+    <div class="f-17">
+      Descrição:
+    </div>
+    <div class="m-t-10" [innerHTML]="workflowType?.description">
+    </div>
+  </div>
+
+  <div class="m-t-15">
+    <mat-card class="large-card">
+      <form [formGroup]="form">
+      <div class="form-group form-group-froala form-group form-group-default card-margins">
+        <label for="description" class="f-18 m-l-5">Motivo da solicitação</label>
+        <div #editor="froalaEditor" [froalaEditor]="froala" formControlName="description" class="froala-editor m-t-10 h-m-100"></div>
+      </div>
+    </form>
+    <div class="m-t-15 d-flex">
+      <div class="p-absolute">
+        <button mat-button color="accent" type="button" (click)="returnDash()">Voltar</button>
+      </div>
+      <div class="t-end">
+        <button style="width: 150px;" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Criar</button>
+      </div>
+    </div>
+    </mat-card>
+  </div>
+</div>
