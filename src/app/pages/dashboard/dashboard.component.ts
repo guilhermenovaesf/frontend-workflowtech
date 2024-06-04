@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { WorkflowTypeService } from '../../services/workflow-type.service';
 import { Router } from '@angular/router';
 import { WorkflowService } from '../../services/workflow.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAssignedToComponent } from '../../components/modal-assigned-to/modal-assigned-to.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,8 @@ export class DashboardComponent {
   constructor(private workflowTypeService: WorkflowTypeService,
               public userService: UserService,
               public router :Router,
-              public workflowService: WorkflowService) {}
+              public workflowService: WorkflowService,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.workflowTypeService.getWorkflowTypes().subscribe((data) => {
@@ -55,6 +58,14 @@ export class DashboardComponent {
   }
 
   opeStepToAnalise(assignedMe: any){
+    console.log(assignedMe,"assignewriwe")
+    const dialogRef = this.dialog.open(ModalAssignedToComponent, {
+      data: {data:assignedMe}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
 
   }
 

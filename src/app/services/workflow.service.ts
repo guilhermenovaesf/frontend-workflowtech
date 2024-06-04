@@ -38,4 +38,8 @@ export class WorkflowService {
   listMyWorkflowsAssignedToMe(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + '/listWorkflowsAssignedMe/'+this.userId);
   }
+
+  listWorkflowSteps(workflowId: any): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + '/listWorkflowStepByWorkflowId/'+workflowId);
+  }
 }

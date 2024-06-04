@@ -9,6 +9,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../../components/shared/shared.module';
 
 
 
@@ -23,7 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
     DashboardRoutingModule,
     MatTabsModule,
     MatBadgeModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule,
+
   ]
 })
 export class DashboardModule { }

@@ -8,6 +8,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { WorkflowTypeFormModule } from './pages/workflow-type-form/workflow-type-form.module';
 import 'froala-editor/js/plugins.pkgd.min.js';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { SharedModule } from './components/shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
             DashboardModule,
             WorkflowTypeFormModule,
             FroalaViewModule.forRoot(),
-            FroalaEditorModule.forRoot()],
+            FroalaEditorModule.forRoot(),
+            SharedModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
