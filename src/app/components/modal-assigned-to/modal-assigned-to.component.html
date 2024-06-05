@@ -10,18 +10,22 @@
 
   <h3 class="m-t-25">Etapas</h3>
   <div *ngFor="let step of workflowSteps">
-    <div>
+    <div [ngClass]="{'disabled': !step.isCurrent}">
       <div>Descrição da etapa:</div>
       <div>{{ step.workflowTypeStepDescription }}</div>
       <div *ngIf="step.isCurrent">
         <label for="comment">Comentário do aprovador:</label>
-        <input class="d-flex input-style" matInput formControlName="comment" id="comment" />
+        <input placeholder="Comente aqui" class="d-flex input-style" matInput formControlName="comment" id="comment" />
+        <div class="m-t-10">
+          <button  class="red-button" mat-raised-button  type="submit" (click)="rejectStep()">Rejeitar etapa</button>
+          <button  class="green-button" mat-raised-button  type="submit" (click)="aproveStep()">Aprovar etapa</button>
+        </div>
       </div>
-      <div class="divider"></div>
+      <div *ngIf="!step.isCurrent && step.comment" disabled>
+        <div>Comentário do aprovador:</div>
+        <div>{{ step.comment }}</div>
+      </div>
+      <div class="divider m-t-10"></div>
     </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>

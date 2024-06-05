@@ -22,4 +22,12 @@ export class ModalAssignedToComponent implements OnInit {
       console.log(this.workflowSteps,"this.workflowSteps")
     })
   }
+
+  rejectStep(){
+
+  }
+
+  aproveStep(){
+
+  }
 }

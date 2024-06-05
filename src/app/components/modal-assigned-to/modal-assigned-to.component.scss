@@ -2,8 +2,41 @@
   margin-top: 25px !important;
 }
 
-.input-style{
+.input-style {
   margin-top: 5px;
   width: 650px;
-  min-height: 31px;
+  border-radius: 5px;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  min-height: 30px;
+  line-height: 1.2;
+}
+
+.divider {
+  height: 1px;
+  background-color: #0000001c;
+}
+
+.green-button {
+  width: 140px;
+  background-color: rgb(36 155 36);
+  color: white;
+  margin-left: 384px;
+}
+
+.red-button {
+  width: 140px;
+  color: white;
+  background-color: rgb(224 9 9 / 90%);
+}
+
+.disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  pointer-events: none;
+  opacity: 0.6;
+  margin-top: 10px;
+  border-radius: 3px;
 }
