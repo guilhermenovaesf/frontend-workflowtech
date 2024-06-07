@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>{{ selected.title }}</h2>
-<mat-dialog-content>
+<mat-dialog-content class="scrollbar1">
   <h3>Dados da solicitação</h3>
   <div>Solicitante: {{ selected.userName }}</div>
   <div>
@@ -15,10 +15,10 @@
       <div>{{ step.workflowTypeStepDescription }}</div>
       <div *ngIf="step.isCurrent">
         <label for="comment">Comentário do aprovador:</label>
-        <input placeholder="Comente aqui" class="d-flex input-style" matInput formControlName="comment" id="comment" />
+        <input placeholder="Comente aqui" class="d-flex input-style" matInput [(ngModel)]="comment" id="comment" />
         <div class="m-t-10">
-          <button  class="red-button" mat-raised-button  type="submit" (click)="rejectStep()">Rejeitar etapa</button>
-          <button  class="green-button" mat-raised-button  type="submit" (click)="aproveStep()">Aprovar etapa</button>
+          <button  class="red-button" mat-raised-button  type="submit" (click)="rejectStep(step)">Rejeitar etapa</button>
+          <button  class="green-button" mat-raised-button  type="submit" (click)="aproveStep(step)">Aprovar etapa</button>
         </div>
       </div>
       <div *ngIf="!step.isCurrent && step.comment" disabled>

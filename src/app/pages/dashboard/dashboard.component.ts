@@ -58,13 +58,12 @@ export class DashboardComponent {
   }
 
   opeStepToAnalise(assignedMe: any){
-    console.log(assignedMe,"assignewriwe")
     const dialogRef = this.dialog.open(ModalAssignedToComponent, {
       data: {data:assignedMe}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.getWorkflowsAssignedToMe();
     });
 
   }

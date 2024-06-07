@@ -42,4 +42,22 @@ export class WorkflowService {
   listWorkflowSteps(workflowId: any): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + '/listWorkflowStepByWorkflowId/'+workflowId);
   }
+
+  approveOrRejectWorkflow(step: any){
+      let httpOptions;
+      if (this.userId) {
+        httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            userId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
+          }),
+        };
+      }
+
+      return this.http.post<any>(
+        `${this.apiUrl}/aproveOrReject`,
+        step,
+        httpOptions
+      );
+  }
 }

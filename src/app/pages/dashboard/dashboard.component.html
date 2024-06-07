@@ -5,11 +5,11 @@
 
 <div class="dashboard-container">
   <div class="spacer"></div>
-  <mat-card class="large-card">
+  <mat-card class="large-card" id="scrollbar1" >
     <mat-tab-group  (selectedTabChange)="onTabChange($event)">
       <mat-tab label="Meus fluxos">
         <ng-template mat-tab-label>
-          <span matBadge="{{myWorkflows?.length}}"  matBadgeSize="medium" matBadgeOverlap="false">Meus fluxos</span>
+          <span matBadge="{{myWorkflows?.length ? myWorkflows?.length: 0 }}"  matBadgeSize="medium" matBadgeOverlap="false">Meus fluxos</span>
         </ng-template>
         <div class="table">
           <div class="row hover-effect d-flex" *ngFor="let workflow of myWorkflows; let i = index" (click)="openMyWorklowsModal(workflow)">
@@ -21,7 +21,7 @@
                   Em progresso
                 </div>
                 <div *ngIf="workflow.finished" class="status finished">
-                  Finalizado
+                  Aprovado
                 </div>
                 <div *ngIf="workflow.canceled" class="status canceled">
                   Recusado
@@ -34,7 +34,7 @@
     </mat-tab>
     <mat-tab label="Pendentes minha aprovação">
       <ng-template mat-tab-label>
-        <span matBadge="{{workflowsAssignedToMe?.length}}"  matBadgeSize="medium" matBadgeOverlap="false">Pendentes minha aprovação</span>
+        <span matBadge="{{workflowsAssignedToMe?.length ? workflowsAssignedToMe?.length : 0}}"  matBadgeSize="medium" matBadgeOverlap="false">Pendentes minha aprovação</span>
       </ng-template>
       <div class="table">
         <div class="row hover-effect d-flex" *ngFor="let assignedMe of workflowsAssignedToMe; let i = index" (click)="opeStepToAnalise(assignedMe)">
@@ -71,7 +71,7 @@
           <mat-divider></mat-divider>
         </div>
       </div>
-      <ng-template #noData>
+      <ng-template  #noData>
         <div class="no-data">No data available</div>
       </ng-template>
     </div>
