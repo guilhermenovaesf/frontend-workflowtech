@@ -12,9 +12,8 @@
           <span matBadge="{{myWorkflows?.length ? myWorkflows?.length: 0 }}"  matBadgeSize="medium" matBadgeOverlap="false">Meus fluxos</span>
         </ng-template>
         <div class="table">
-          <div class="row hover-effect d-flex" *ngFor="let workflow of myWorkflows; let i = index" (click)="openMyWorklowsModal(workflow)">
+          <div class="row hover-effect" style="display: list-item;" *ngFor="let workflow of myWorkflows; let i = index" (click)="openMyWorklowsModal(workflow)">
             <div *ngIf="i === 0" class="divider"></div>
-
             <div mat-button class="b-list m-l-15  p-t-10 " >
                 <div class="workflow-list-title ">{{ workflow.title }}</div>
                 <div *ngIf="!workflow.canceled && !workflow.finished" class="status progress">
@@ -28,6 +27,7 @@
                 </div>
                 <div class="workflow-time-subtitle   m-t-5">{{ workflow.createdOn | date:  'dd/MM/yyyy HH:mm' }}</div>
             </div>
+
             <div  class="divider"></div>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <span matBadge="{{workflowsAssignedToMe?.length ? workflowsAssignedToMe?.length : 0}}"  matBadgeSize="medium" matBadgeOverlap="false">Pendentes minha aprovação</span>
       </ng-template>
       <div class="table">
-        <div class="row hover-effect d-flex" *ngFor="let assignedMe of workflowsAssignedToMe; let i = index" (click)="opeStepToAnalise(assignedMe)">
+        <div class="row hover-effect" tyle="display: list-item;"  *ngFor="let assignedMe of workflowsAssignedToMe; let i = index" (click)="opeStepToAnalise(assignedMe)">
           <div *ngIf="i === 0" class="divider"></div>
           <div mat-button class="b-list m-l-15  p-t-10 " >
             <div class="workflow-list-title ">{{ assignedMe.title }}</div>

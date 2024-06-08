@@ -14,12 +14,13 @@ export class WorkflowService {
   constructor(private http: HttpClient) { }
 
   createWorkflow(workflow: any) {
+   const userId = localStorage.getItem('userId');
     let httpOptions;
-    if (this.userId) {
+    if (userId) {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          userId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
+          userId: userId.toString(), // Adiciona o userId ao cabeçalho da requisição
         }),
       };
     }
@@ -32,11 +33,13 @@ export class WorkflowService {
   }
 
   listMyWorkflows(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/listMyWorkflows/'+this.userId);
+    const userId = localStorage.getItem('userId');
+    return this.http.get<any[]>(this.apiUrl + '/listMyWorkflows/'+userId);
   }
 
   listMyWorkflowsAssignedToMe(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '/listWorkflowsAssignedMe/'+this.userId);
+    const userId = localStorage.getItem('userId');
+    return this.http.get<any[]>(this.apiUrl + '/listWorkflowsAssignedMe/'+userId);
   }
 
   listWorkflowSteps(workflowId: any): Observable<any[]> {
@@ -44,12 +47,13 @@ export class WorkflowService {
   }
 
   approveOrRejectWorkflow(step: any){
+    const userId = localStorage.getItem('userId');
       let httpOptions;
-      if (this.userId) {
+      if (userId) {
         httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            userId: this.userId.toString(), // Adiciona o userId ao cabeçalho da requisição
+            userId: userId.toString(), // Adiciona o userId ao cabeçalho da requisição
           }),
         };
       }

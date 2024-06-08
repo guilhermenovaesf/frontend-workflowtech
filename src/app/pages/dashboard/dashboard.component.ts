@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WorkflowService } from '../../services/workflow.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAssignedToComponent } from '../../components/modal-assigned-to/modal-assigned-to.component';
+import { ModalMyflowsComponent } from '../../components/modal-myflows/modal-myflows.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,6 @@ export class DashboardComponent {
 
   goToWorkflowForm(workflowType: any){
     this.router.navigate(['/workflow/form/'+workflowType.id]);
-    console.log(workflowType)
   }
 
   goToCreateWorkflowType(){
@@ -42,24 +42,27 @@ export class DashboardComponent {
   getMyWorkflows(){
     this.workflowService.listMyWorkflows().subscribe((data)=>{
       this.myWorkflows = data;
-      console.log(data);
     })
   }
 
   getWorkflowsAssignedToMe(){
     this.workflowService.listMyWorkflowsAssignedToMe().subscribe((data)=>{
       this.workflowsAssignedToMe = data;
-      console.log(this.workflowsAssignedToMe,"this.workflowsAssignedToM");
     })
   }
 
   openMyWorklowsModal(item: any){
+    console.log(item,"item")
+    const dialogRef = this.dialog.open(ModalMyflowsComponent, {
+      data: {data:item},
+      width: '700px',
+    });
 
   }
 
   opeStepToAnalise(assignedMe: any){
     const dialogRef = this.dialog.open(ModalAssignedToComponent, {
-      data: {data:assignedMe}
+      data: {data:assignedMe},
     });
 
     dialogRef.afterClosed().subscribe(result => {

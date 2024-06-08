@@ -4,13 +4,15 @@ import { ModalAssignedToComponent } from '../modal-assigned-to/modal-assigned-to
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalMyflowsComponent } from '../modal-myflows/modal-myflows.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @NgModule({
-  declarations: [ModalAssignedToComponent],
+  declarations: [ModalAssignedToComponent,ModalMyflowsComponent],
   exports:[
-    ModalAssignedToComponent
+    ModalAssignedToComponent,ModalMyflowsComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule
   ],
 
 })
