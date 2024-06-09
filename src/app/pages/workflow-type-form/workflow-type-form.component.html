@@ -8,36 +8,47 @@
     <form [formGroup]="form">
       <div class="form-group">
         <label for="title" class="f-16">Título</label>
-        <input matInput class="input-style" placeholder="Digite o título" formControlName="title" id="title" class="w-95 m-t-5" />
+        <input matInput class="input-style" formControlName="title" id="title" class="w-95 m-t-10" />
+        <div *ngIf="form.get('title')?.invalid && (form.get('title')?.dirty || form.get('title')?.touched)">
+          <small class="text-danger">O título é obrigatório.</small>
+        </div>
       </div>
 
       <div class="form-group form-group-froala form-group form-group-default m-t-15">
         <label for="description"  class="f-16">Descrição</label>
-        <div #editor="froalaEditor" [froalaEditor]="froalaTiny" formControlName="description" class="froala-editor m-t-5"></div>
+        <div #editor="froalaEditor" [froalaEditor]="froalaTiny" formControlName="description" class="froala-editor m-t-10"></div>
+        <div *ngIf="form.get('description')?.invalid && (form.get('description')?.dirty || form.get('description')?.touched)">
+          <small class="text-danger">A descrição é obrigatória.</small>
+        </div>
       </div>
 
       <div formArrayName="workflowTypeStepTOList">
         <div *ngFor="let step of steps.controls; let i = index" [formGroupName]="i" class="form-group m-t-15">
           <label class="f-16" for="step-description-{{i}}">Descrição da Etapa {{i+1}}</label>
-          <input matInput formControlName="description" id="step-description-{{i}}" class="w-95 m-t-5 m-t-10 m-b-15" />
-
+          <mat-icon *ngIf="i>0" class="pointer m-t-5 icon-delete" aria-hidden="false" color="warn" (click)="removeStep(i)" fontIcon="delete"></mat-icon>
+          <input matInput formControlName="description" id="step-description-{{i}}" class="w-95 m-t-5 m-t-10" />
+          <div *ngIf="step.get('description')?.invalid && (step.get('description')?.dirty || step.get('description')?.touched)">
+            <small class="text-danger">A descrição da etapa é obrigatória.</small>
+          </div>
+          <div class=" m-t-15"></div>
           <label class="m-t-15 f-16" for="user-select">Responsável</label>
-          <select matNativeControl formControlName="userId" id="user-select" class="custom-select m-t-5">
+          <select matNativeControl formControlName="userId" id="user-select" class="custom-select m-t-10">
             <option value="" disabled selected>Selecione um responsável</option>
             <option *ngFor="let user of userList" [value]="user.id">{{user.name}}</option>
           </select>
-          <mat-icon class="pointer m-t-5" aria-hidden="false" color="warn" (click)="removeStep(i)" fontIcon="delete"></mat-icon>
-          <!-- <button mat-button >Remover Etapa</button> -->
+          <div *ngIf="step.get('userId')?.invalid && (step.get('userId')?.dirty || step.get('userId')?.touched)">
+            <small class="text-danger">O responsável é obrigatório.</small>
+          </div>
         </div>
       </div>
 
-      <button class="m-t-10" mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
+      <button class="m-t-10 b-add-step" mat-button color="primary" (click)="addStep()">Adicionar Etapa</button>
 
       <div class="spacer"></div>
     </form>
     <div class="m-t-50 d-flex">
       <div class="">
-        <button mat-button color="accent" type="button" (click)="returnDash()">Voltar</button>
+        <button mat-button color="primary" type="button" (click)="returnDash()">Voltar</button>
       </div>
       <div class="end">
         <button style="width: 150px;" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Criar</button>

@@ -1,6 +1,6 @@
 import { WorkflowTypeService } from './../../services/workflow-type.service';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class WorkflowTypeFormComponent {
   public froalaTiny: any = {
     placeholderText: '',
-    charCounterCount: false,
+    charCounterCount: true,
     heightMin: 200,
     heightMax: 300,
     attribution: false,
@@ -34,8 +34,8 @@ export class WorkflowTypeFormComponent {
   userList:any;
   constructor(private fb: FormBuilder, public userService :UserService, public workflowTypeService : WorkflowTypeService, public router: Router) {
     this.form = this.fb.group({
-      title: [''],
-      description: [''],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
       workflowTypeStepTOList: this.fb.array([])
     });
   }
@@ -43,9 +43,10 @@ export class WorkflowTypeFormComponent {
   ngOnInit(): void {
       this.userService.listUsers().subscribe((data)=>{
         this.userList = data;
-        console.log(this.userList)
-      })
+      });
+      this.addStep();
   }
+
 
   get steps(): FormArray {
     return this.form.get('workflowTypeStepTOList') as FormArray;
@@ -53,8 +54,8 @@ export class WorkflowTypeFormComponent {
 
   addStep(): void {
     const stepForm = this.fb.group({
-      description: [''],
-      userId: ['']
+      description: ['', Validators.required],
+      userId: ['', Validators.required]
     });
     this.steps.push(stepForm);
   }
@@ -70,6 +71,9 @@ export class WorkflowTypeFormComponent {
         this.router.navigate(['/dashboard']);
       })
       // Processar os dados do formulário clonados e modificados conforme necessário
+    } else {
+      this.markAllAsTouched();
+      console.log('Formulário inválido');
     }
   }
 
@@ -79,6 +83,13 @@ export class WorkflowTypeFormComponent {
 
   loggout(){
     this.userService.logout();
+  }
+
+  private markAllAsTouched() {
+    this.form.markAllAsTouched();
+    this.steps.controls.forEach((control) => {
+      control.markAllAsTouched();
+    });
   }
 
 }

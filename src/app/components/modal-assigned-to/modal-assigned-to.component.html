@@ -12,9 +12,9 @@
   <div [innerHTML]="selected?.workflowDescription"></div>
   <div class="divider m-t-10"></div>
   <h3 class="m-t-25 titles">Etapas</h3>
-  <div *ngFor="let step of workflowSteps">
+  <div *ngFor="let step of workflowSteps; let i = index">
     <div [ngClass]="{'disabled': !step.isCurrent}">
-      <div class="color-topics">Descrição da etapa:</div>
+      <div class="color-topics" [ngClass]="{'m-t-10': i>0}">Descrição da etapa:</div>
       <div>{{ step.workflowTypeStepDescription }}</div>
       <div *ngIf="step.isCurrent">
         <label class="color-topics" for="comment">Comentário do aprovador:</label>

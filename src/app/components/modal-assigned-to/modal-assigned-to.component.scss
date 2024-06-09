@@ -34,15 +34,15 @@
 
 .green-button {
   width: 140px;
-  background-color: rgb(36 155 36);
-  color: white;
+  background-color: rgb(36 155 36) !important;
+  color: white !important;
   margin-left: 384px;
 }
 
 .red-button {
   width: 140px;
-  color: white;
-  background-color: rgb(224 9 9 / 90%);
+  color: white !important;
+  background-color: rgb(224 9 9 / 90%) !important;
 }
 
 .disabled {

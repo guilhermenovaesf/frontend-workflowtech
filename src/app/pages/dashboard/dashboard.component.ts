@@ -48,6 +48,7 @@ export class DashboardComponent {
   getWorkflowsAssignedToMe(){
     this.workflowService.listMyWorkflowsAssignedToMe().subscribe((data)=>{
       this.workflowsAssignedToMe = data;
+      console.log(this.workflowsAssignedToMe)
     })
   }
 
@@ -62,6 +63,7 @@ export class DashboardComponent {
   opeStepToAnalise(assignedMe: any){
     const dialogRef = this.dialog.open(ModalAssignedToComponent, {
       data: {data:assignedMe},
+      width: '730px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
