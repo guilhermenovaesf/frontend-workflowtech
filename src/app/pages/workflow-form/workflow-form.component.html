@@ -4,11 +4,11 @@
 </mat-toolbar>
 
 <div class="dashboard-container">
-  <div class="description ">
-    <div class="f-17">
-      Descrição:
+  <div class="description m-l-10">
+    <div class="f-19">
+      Descrição do fluxo:
     </div>
-    <div class="m-t-10" [innerHTML]="workflowType?.description">
+    <div class="m-t-10 f-15" [innerHTML]="workflowType?.description">
     </div>
   </div>
 
@@ -16,13 +16,14 @@
     <mat-card class="large-card">
       <form [formGroup]="form">
       <div class="form-group form-group-froala form-group form-group-default card-margins">
-        <label for="description" class="f-18 m-l-5">Motivo da solicitação</label>
-        <div #editor="froalaEditor" [froalaEditor]="froala" formControlName="description" class="froala-editor m-t-10 h-m-100"></div>
+        <label for="description" class="f-18 m-l-5">Motivo da solicitação:</label>
+        <div #editor="froalaEditor" (input)="onInput($event)" [froalaEditor]="froala" formControlName="description" class="froala-editor m-t-10 h-m-100"></div>
+        <span *ngIf="!description && sendWithoutReason" class="warn-message m-l-10">Por favor, informe o motivo da solicitação</span>
       </div>
     </form>
     <div class="m-t-15 d-flex">
       <div class="">
-        <button mat-button color="accent" type="button" (click)="returnDash()">Voltar</button>
+        <button mat-button color="primary" type="button" (click)="returnDash()">Voltar</button>
       </div>
       <div class="end">
         <button style="width: 150px;" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Criar</button>

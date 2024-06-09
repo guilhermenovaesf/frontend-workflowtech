@@ -1,28 +1,33 @@
 <h2 mat-dialog-title>{{ selected.title }}</h2>
+<div class="divider3"></div>
 <mat-dialog-content class="scrollbar1">
-  <h3>Dados da solicitação</h3>
-  <div>Solicitante: {{ selected.userName }}</div>
-  <div>
-    Data de criação: {{ selected.createdOn | date : "dd/MM/yyyy HH:mm" }}
+  <h3 class="titles">Dados da solicitação</h3>
+  <div class="color-topics">Solicitante:</div>
+  <div >{{ selected.userName }}</div>
+  <div class="color-topics m-t-5">
+    Data de criação:
   </div>
-  <div>Descrição da solicitação:</div>
+  <div >{{ selected.createdOn | date : "dd/MM/yyyy HH:mm" }} </div>
+  <div class="color-topics  m-t-5">Descrição da solicitação:</div>
   <div [innerHTML]="selected?.workflowDescription"></div>
-
-  <h3 class="m-t-25">Etapas</h3>
+  <div class="divider m-t-10"></div>
+  <h3 class="m-t-25 titles">Etapas</h3>
   <div *ngFor="let step of workflowSteps">
     <div [ngClass]="{'disabled': !step.isCurrent}">
-      <div>Descrição da etapa:</div>
+      <div class="color-topics">Descrição da etapa:</div>
       <div>{{ step.workflowTypeStepDescription }}</div>
       <div *ngIf="step.isCurrent">
-        <label for="comment">Comentário do aprovador:</label>
-        <input placeholder="Comente aqui" class="d-flex input-style" matInput [(ngModel)]="comment" id="comment" />
-        <div class="m-t-10">
-          <button  class="red-button" mat-raised-button  type="submit" (click)="rejectStep(step)">Rejeitar etapa</button>
-          <button  class="green-button" mat-raised-button  type="submit" (click)="aproveStep(step)">Aprovar etapa</button>
+        <label class="color-topics" for="comment">Comentário do aprovador:</label>
+        <input placeholder="Comente aqui" class="d-flex input-style"(input)="onInput($event)" matInput [(ngModel)]="comment" id="comment" />
+        <span *ngIf="!comment && rejectStepNoComment" class="warn-message">Por favor, informe o motivo da rejeição</span>
+        <span *ngIf="!comment && aproveStepNoComent" class="warn-message">Por favor, informe o motivo da aprovação</span>
+        <div class="m-t-15">
+          <button class="red-button" mat-raised-button  type="submit" (click)="rejectStep(step)">Rejeitar etapa</button>
+          <button class="green-button" mat-raised-button  type="submit" (click)="aproveStep(step)">Aprovar etapa</button>
         </div>
       </div>
       <div *ngIf="!step.isCurrent && step.comment" disabled>
-        <div>Comentário do aprovador:</div>
+        <div class="color-topics">Comentário do aprovador:</div>
         <div>{{ step.comment }}</div>
       </div>
       <div class="divider m-t-10"></div>

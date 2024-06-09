@@ -52,7 +52,6 @@ export class DashboardComponent {
   }
 
   openMyWorklowsModal(item: any){
-    console.log(item,"item")
     const dialogRef = this.dialog.open(ModalMyflowsComponent, {
       data: {data:item},
       width: '700px',

@@ -9,7 +9,7 @@
     <mat-tab-group  (selectedTabChange)="onTabChange($event)">
       <mat-tab label="Meus fluxos">
         <ng-template mat-tab-label>
-          <span matBadge="{{myWorkflows?.length ? myWorkflows?.length: 0 }}"  matBadgeSize="medium" matBadgeOverlap="false">Meus fluxos</span>
+          <span matBadge="{{myWorkflows?.length ? myWorkflows?.length: 0 }}"  matBadgeSize="medium" matBadgeOverlap="false">MEUS FLUXOS</span>
         </ng-template>
         <div class="table">
           <div class="row hover-effect" style="display: list-item;" *ngFor="let workflow of myWorkflows; let i = index" (click)="openMyWorklowsModal(workflow)">
@@ -34,7 +34,7 @@
     </mat-tab>
     <mat-tab label="Pendentes minha aprovação">
       <ng-template mat-tab-label>
-        <span matBadge="{{workflowsAssignedToMe?.length ? workflowsAssignedToMe?.length : 0}}"  matBadgeSize="medium" matBadgeOverlap="false">Pendentes minha aprovação</span>
+        <span matBadge="{{workflowsAssignedToMe?.length ? workflowsAssignedToMe?.length : 0}}" matBadgeSize="medium" matBadgeOverlap="false">PENDENTES PARA APROVAÇÃO</span>
       </ng-template>
       <div class="table">
         <div class="row hover-effect" tyle="display: list-item;"  *ngFor="let assignedMe of workflowsAssignedToMe; let i = index" (click)="opeStepToAnalise(assignedMe)">
@@ -44,7 +44,7 @@
             <div class="userName">
               {{assignedMe.userName}}
             </div>
-            <div class="workflow-time-subtitle   m-t-5">{{ assignedMe.createdOn | date:  'dd/MM/yyyy HH:mm' }}</div>
+            <div class="workflow-time-subtitle m-t-5">{{ assignedMe.createdOn | date: 'dd/MM/yyyy HH:mm' }}</div>
         </div>
         <div  class="divider"></div>
         </div>
@@ -56,19 +56,19 @@
   <mat-card class="small-card">
     <mat-card-header class="h-color" style="z-index: 999;">
       <div mat-card-title class="card-title-wrapper">
-        <span class="card-title">Fluxos Disponíveis</span>
+        <span class="card-title">Fluxos disponíveis</span>
       </div>
       <button *ngIf="userService.user?.admin" mat-button class="create-button" (click)="goToCreateWorkflowType()">Criar</button>
 
     </mat-card-header>
     <div class="content-wrapper">
-      <div class="workflow-list scrollbar"  id="scrollbar1"  *ngIf="workflowTypeList.length > 0; else noData">
-        <div class="workflow-item" *ngFor="let workflowType of workflowTypeList; let i = index">
-          <mat-divider *ngIf="i===0"></mat-divider>
-          <button mat-button class="workflow-item" (click)="goToWorkflowForm(workflowType)">
+      <div class="workflow-list scrollbar" id="scrollbar1" *ngIf="workflowTypeList.length > 0; else noData">
+        <div class="" *ngFor="let workflowType of workflowTypeList; let i = index">
+          <div class="divider" *ngIf="i===0"></div>
+          <div mat-button class="workflow-item hover-effect" (click)="goToWorkflowForm(workflowType)">
             <div class="workflow-title">{{ workflowType.title }}</div>
-          </button>
-          <mat-divider></mat-divider>
+          </div>
+          <div  class="divider"></div>
         </div>
       </div>
       <ng-template  #noData>

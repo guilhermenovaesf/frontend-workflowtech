@@ -7,21 +7,21 @@
   <mat-card class="large-card">
     <form [formGroup]="form">
       <div class="form-group">
-        <label for="title">Título</label>
-        <input matInput formControlName="title" id="title" class="w-95 m-t-5" />
+        <label for="title" class="f-16">Título</label>
+        <input matInput class="input-style" placeholder="Digite o título" formControlName="title" id="title" class="w-95 m-t-5" />
       </div>
 
       <div class="form-group form-group-froala form-group form-group-default m-t-15">
-        <label for="description">Descrição</label>
+        <label for="description"  class="f-16">Descrição</label>
         <div #editor="froalaEditor" [froalaEditor]="froalaTiny" formControlName="description" class="froala-editor m-t-5"></div>
       </div>
 
       <div formArrayName="workflowTypeStepTOList">
         <div *ngFor="let step of steps.controls; let i = index" [formGroupName]="i" class="form-group m-t-15">
-          <label for="step-description-{{i}}">Descrição da Etapa {{i+1}}</label>
+          <label class="f-16" for="step-description-{{i}}">Descrição da Etapa {{i+1}}</label>
           <input matInput formControlName="description" id="step-description-{{i}}" class="w-95 m-t-5 m-t-10 m-b-15" />
 
-          <label class="m-t-15" for="user-select">Responsável</label>
+          <label class="m-t-15 f-16" for="user-select">Responsável</label>
           <select matNativeControl formControlName="userId" id="user-select" class="custom-select m-t-5">
             <option value="" disabled selected>Selecione um responsável</option>
             <option *ngFor="let user of userList" [value]="user.id">{{user.name}}</option>

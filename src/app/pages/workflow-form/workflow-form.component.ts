@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class WorkflowFormComponent {
   public froala: any = {
     placeholderText: '',
-    charCounterCount: false,
+    charCounterCount: true,
     heightMin: 200,
     heightMax: 300,
     attribution: false,
@@ -61,6 +61,7 @@ export class WorkflowFormComponent {
   description: any;
 
   form: FormGroup;
+  sendWithoutReason =false;
 
   constructor(
     public activateRoute: ActivatedRoute,
@@ -81,20 +82,22 @@ export class WorkflowFormComponent {
         .getWorkflowType(this.workflowTypeId)
         .subscribe((data) => {
           this.workflowType = data;
-          console.log(this.workflowType, 'workflowType');
         });
     });
   }
 
   onSubmit(){
-    console.log(this.form.value,"this.form.value")
     let workflowForm ={
       workflowTypeId: this.workflowTypeId,
       description: this.form.value.description
     }
-    this.workflowService.createWorkflow(workflowForm).subscribe((data)=>{
-      this.router.navigate(['/dashboard']);
-    })
+    if(this.form.value.description){
+      this.workflowService.createWorkflow(workflowForm).subscribe((data)=>{
+        this.router.navigate(['/dashboard']);
+      })
+    }else{
+      this.sendWithoutReason = true;
+    }
   }
 
   returnDash(){
@@ -103,5 +106,9 @@ export class WorkflowFormComponent {
 
   loggout(){
     this.userService.logout();
+  }
+
+  onInput(event: Event): void {
+    this.sendWithoutReason = false;
   }
 }

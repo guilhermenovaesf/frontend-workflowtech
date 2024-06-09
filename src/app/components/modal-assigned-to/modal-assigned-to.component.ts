@@ -12,6 +12,8 @@ export class ModalAssignedToComponent implements OnInit {
   selected: any;
   workflowSteps: any;
   comment: string = '';
+  rejectStepNoComment = false;
+  aproveStepNoComent = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public workflowService: WorkflowService,public dialogRef: MatDialogRef<any>){
     this.selected = data.data;
@@ -26,15 +28,21 @@ export class ModalAssignedToComponent implements OnInit {
   }
 
   rejectStep(step: any){
+
     let stepTOReject = {
       workflowId: this.selected.workflowId,
       workflowStepId: step.id,
       comment: this.comment,
       aproved: false
     }
-    this.workflowService.approveOrRejectWorkflow(stepTOReject).subscribe((data)=>{
-      this.dialogRef.close();
-    });
+    if(this.comment){
+      this.workflowService.approveOrRejectWorkflow(stepTOReject).subscribe((data)=>{
+        this.dialogRef.close();
+      });
+    }else{
+      this.rejectStepNoComment = true;
+      this.aproveStepNoComent = false;
+    }
   }
 
   aproveStep(step: any){
@@ -44,9 +52,18 @@ export class ModalAssignedToComponent implements OnInit {
       comment: this.comment,
       aproved: true
     }
-    this.workflowService.approveOrRejectWorkflow(stepTOAprove).subscribe((data)=>{
-      console.log("a")
-      this.dialogRef.close();
-    });
+    if(this.comment){
+      this.workflowService.approveOrRejectWorkflow(stepTOAprove).subscribe((data)=>{
+        this.dialogRef.close();
+      });
+    }else{
+      this.aproveStepNoComent = true;
+      this.rejectStepNoComment = false;
+    }
+  }
+
+  onInput(event: Event): void {
+    this.rejectStepNoComment = false;
+    this.aproveStepNoComent = false;
   }
 }

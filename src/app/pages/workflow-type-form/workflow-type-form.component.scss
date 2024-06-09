@@ -51,6 +51,7 @@ input {
   transition: background-color 0.3s; /* Adiciona uma transição suave */
   min-height: 30px;
   font-size: 15px;
+  padding-left: 10px;
 }
 
 input:focus {
@@ -59,12 +60,9 @@ input:focus {
   outline: none; /* Remove a borda padrão do navegador */
 }
 
-
-
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: white !important;
 }
-
 
 .custom-mat-form-field {
   width: 100%;
@@ -115,6 +113,10 @@ input:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.m-t-50{
+.m-t-50 {
   margin-top: 50px;
+}
+
+.f-16 {
+  font-size: 16px;
 }

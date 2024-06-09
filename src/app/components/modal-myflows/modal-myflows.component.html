@@ -1,59 +1,63 @@
 <h2 mat-dialog-title>{{ selected.title }}</h2>
+<div class="divider3"></div>
 <mat-dialog-content class="scrollbar1">
-  <h3>Dados da solicitação</h3>
-  <div>
-    Data de criação: {{ selected.createdOn | date : "dd/MM/yyyy HH:mm" }}
-  </div>
-  <div>Etapas para aprovação: {{ workflowSteps?.length }}</div>
-  <div>Descrição da solicitação:</div>
+  <h3 class="titles">Dados da solicitação</h3>
+  <div class="color-topics">Data de criação:</div>
+  <div> {{ selected.createdOn | date : "dd/MM/yyyy HH:mm" }}</div>
+  <div class="m-t-5 color-topics">Etapas para aprovação:</div>
+  <div>{{ workflowSteps?.length}}</div>
+  <div class="m-t-5 color-topics">Descrição da solicitação:</div>
   <div [innerHTML]="selected?.description"></div>
-  <div class="divider3 m-t-10"></div>
+  <div class="divider m-t-5"></div>
+
+  <!-- <div class="divider3 m-t-10"></div> -->
   <h3 class="m-t-25 titles">Etapas</h3>
-  <div *ngFor="let step of workflowSteps">
+
+  <div *ngFor="let step of workflowSteps; let i =index">
     <div class="d-flex">
-      <div>
-        <div>Responsável:</div>
+      <div [ngClass]="{'m-t-10': i > 0}">
+        <div class="color-topics">Responsável:</div>
         <div>{{ step.assignedTo.name }}</div>
       </div>
-      <div class="status" *ngIf="step.isCurrent && !selected.canceled && !step.isApproved">
+      <div  [ngClass]="{'m-t-10': i > 0}" class="status" *ngIf="step.isCurrent && !selected.canceled && !step.isApproved">
         Pendente
         <mat-icon class="timer icons-top yellow" aria-hidden="false" fontIcon="timer"></mat-icon>
       </div>
-      <div class="status" *ngIf="step.isCurrent && selected.canceled">
+      <div  [ngClass]="{'m-t-10': i > 0}" class="status" *ngIf="step.isCurrent && selected.canceled">
         Rejeitada
         <mat-icon class="cancel icons-top red" aria-hidden="false" fontIcon="cancel"></mat-icon>
       </div>
-      <div class="status" *ngIf="!step.isCurrent && !step.isApproved">
+      <div  [ngClass]="{'m-t-10': i > 0}" class="status" *ngIf="!step.isCurrent && !step.isApproved">
         Pendente etapa anterior
         <mat-icon class="hourglass_top icons-top yellow" aria-hidden="false" fontIcon="hourglass_top"></mat-icon>
       </div>
-      <div class="status" *ngIf="!step.isCurrent && step.isApproved">
+      <div  [ngClass]="{'m-t-10': i > 0}" class="status" *ngIf="!step.isCurrent && step.isApproved">
         Aprovada
         <mat-icon class="check icons-top green" aria-hidden="false" color="green" fontIcon="check"></mat-icon>
       </div>
     </div>
-    <div>Descrição da etapa:</div>
+    <div class="color-topics">Descrição da etapa:</div>
     <div>{{ step.workflowTypeStepDescription }}</div>
     <!-- etapa atual -->
     <div *ngIf="step.isCurrent && !selected.canceled">
-      <label for="comment">Comentário do aprovador:</label>
+      <div class="color-topics">Comentário do aprovador:</div>
       <div>{{ step.comment }}</div>
       <div class="m-t-10"></div>
     </div>
     <!-- etapa rejeitada -->
     <div *ngIf="step.isCurrent && selected.canceled">
-      <label for="comment">Comentário do aprovador:</label>
+      <div class="color-topics">Comentário do aprovador:</div>
       <div>{{ step.comment }}</div>
       <div class="m-t-10"></div>
     </div>
     <!-- etapa pendente -->
     <div *ngIf="!step.isCurrent && !step.isApproved" >
-      <div>Comentário do aprovador:</div>
+      <div class="color-topics">Comentário do aprovador:</div>
       <div>{{ step.comment }}</div>
     </div>
     <!-- etapa aprovada -->
     <div *ngIf="!step.isCurrent && step.isApproved" >
-      <div>Comentário do aprovador:</div>
+      <div class="color-topics">Comentário do aprovador:</div>
       <div>{{ step.comment }}</div>
     </div>
     <div class="divider m-t-10"></div>
