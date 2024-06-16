@@ -16,6 +16,7 @@ export class DashboardComponent {
   workflowTypeList: any[] = [];
   myWorkflows: any;
   workflowsAssignedToMe:any;
+  isAdmin = false;
 
   constructor(private workflowTypeService: WorkflowTypeService,
               public userService: UserService,
@@ -29,6 +30,7 @@ export class DashboardComponent {
     });
     this.getMyWorkflows();
     this.getWorkflowsAssignedToMe();
+    this.getUser();
   }
 
   goToWorkflowForm(workflowType: any){
@@ -48,7 +50,6 @@ export class DashboardComponent {
   getWorkflowsAssignedToMe(){
     this.workflowService.listMyWorkflowsAssignedToMe().subscribe((data)=>{
       this.workflowsAssignedToMe = data;
-      console.log(this.workflowsAssignedToMe)
     })
   }
 
@@ -58,6 +59,14 @@ export class DashboardComponent {
       width: '700px',
     });
 
+  }
+
+  getUser(){
+    this.userService.getUser(localStorage.getItem('userId')).subscribe((data:any)=>{
+    if(data && data.admin){
+      this.isAdmin=true;
+    }
+    })
   }
 
   opeStepToAnalise(assignedMe: any){
